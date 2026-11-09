@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: groww-sip-fit
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_GROQ_API_KEY
+        sync: false
+      - key: VITE_GROQ_MODEL
+        value: openai/gpt-oss-120b
+      - key: VITE_ENABLE_DETERMINISTIC_FALLBACK
+        value: "false"
